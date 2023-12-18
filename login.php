@@ -1,8 +1,10 @@
 <?php
 require_once 'init/init.php';
+$error = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = inputCleaning('email');
+    $password = inputCleaning('password');
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error['email'] = "Email is not valid!";
     };
@@ -11,24 +13,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = $pdo->prepare($query);
     $data->bindValue(':email', $email, PDO::PARAM_STR);
     $data->execute();
+    $result = $data->fetch(PDO::FETCH_ASSOC);
 
     if (!$data->rowCount() > 0) {
         $error['emaildb'] =  "The email doesn't exists in the database";
-    }
+    } else {
 
-    $password = inputCleaning('password');
+        if (password_verify($password, $result['mdp'])) {
+            $_SESSION['user']['username'] = $result['username'];
+            $_SESSION['user']['firstname'] = $result['firstname'];
+            $_SESSION['user']['lastname'] = $result['id_membre'];
+            $_SESSION['user']['address'] = $result['address'];
+            $_SESSION['user']['city'] = $result['city'];
+            $_SESSION['user']['code_postal'] = $result['code_postal'];
 
-
-    $query2 = "SELECT mdp FROM membre WHERE email=:email";
-    $data2 = $pdo->prepare($query2);
-    $data2->bindValue(':email', $email, PDO::PARAM_STR);
-    $result_password = $data2->execute();
-
-
-    if (password_verify($password, $result_password)) {
-        header('Location: profil.php');
+            header('Location: profil.php');
+        } else {
+            $error['password'] = "The password is not identical";
+        }
     }
 }
+
+
+
+
+
 
 ?>
 <?php require_once 'partials/header.php' ?>
