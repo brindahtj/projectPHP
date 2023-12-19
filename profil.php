@@ -4,7 +4,6 @@ if (!userConnected()) {
 }
 
 
-
 ?>
 <?php require_once 'partials/header.php' ?>
 
@@ -68,9 +67,9 @@ if (!userConnected()) {
                                 <img src="https://randomuser.me/api/portraits/women/88.jpg" alt="Photo de profil" class="img-fluid rounded-circle">
                             </div>
                             <div class="col-md-9">
-                                <p>Nom: <?php $_SESSION['user']['lastname'] . ' ' . $_SESSION['user']['firstname']  ?></p>
+                                <p>Nom: <?php echo $_SESSION['user']['lastname'] . ' ' . $_SESSION['user']['firstname']  ?></p>
                                 <p>Email: <?= $_SESSION['user']['email'] ?></p>
-                                <p>Adresse: <?php $_SESSION['user']['address'] . ', ' . $_SESSION['user']['code_postal'] . '  ' . $_SESSION['user']['city'] ?></p>
+                                <p>Adresse: <?php echo $_SESSION['user']['address'] . ', ' . $_SESSION['user']['code_postal'] . '  ' . $_SESSION['user']['city'] ?></p>
                                 <p>Téléphone: +123 456 7890</p>
                             </div>
                         </div>
@@ -117,7 +116,7 @@ if (!userConnected()) {
             <div id="mon-adresse-content">
                 <h2>Mes Adresses</h2>
                 <p>Adresse: <?= $_SESSION['user']['address'] ?></p>
-                <p>Code postal:<?= $_SESSION['user']['code_postal'] ?></p>
+                <p>Code postal: <?= $_SESSION['user']['code_postal'] ?></p>
                 <p>Ville: <?= $_SESSION['user']['city']  ?></p>
                 <!-- Ajoutez d'autres informations d'adresse fictives si nécessaire -->
             </div>

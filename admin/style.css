@@ -1,0 +1,33 @@
+body {
+    padding-top: 56px;
+    /* Pour compenser la hauteur de la barre de navigation fixe */
+}
+
+.sidebar {
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 20px;
+    background-color: #040519;
+    border-right: 1px solid #dee2e6;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+.custom-link {
+    color: #e7eaf9;
+    font-weight: bold;
+}
+
+.custom-link:hover {
+    background-color: #e9ecef;
+}
+
+.custom-bg {
+    background-color: #040519 !important;
+}
