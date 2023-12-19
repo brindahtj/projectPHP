@@ -1,3 +1,4 @@
+<?php require_once 'init/init.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,12 +35,15 @@
                     </form>
 
                     <div class="d-flex align-items-center me-lg-3">
-                        <a href="register.php" class="nav-link px-2 link-body-emphasis position-relative me-2">
-                            <i class="bi bi-person-lines-fill fs-4"></i>
-                        </a>
-                        <a href="login.php" class="nav-link px-2 link-body-emphasis position-relative me-2">
-                            <i class="bi bi-box-arrow-in-right fs-4"></i>
-                        </a>
+                        <?php if (!userConnected()) : ?>
+
+                            <a href="register.php" class="nav-link px-2 link-body-emphasis position-relative me-2">
+                                <i class="bi bi-person-lines-fill fs-4"></i>
+                            </a>
+                            <a href="login.php" class="nav-link px-2 link-body-emphasis position-relative me-2">
+                                <i class="bi bi-box-arrow-in-right fs-4"></i>
+                            </a>
+                        <?php endif ?>
                         <a href="#" class="nav-link px-2 link-body-emphasis position-relative me-2">
                             <i class="bi bi-cart3 fs-3"></i>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -47,28 +51,38 @@
                             </span>
                         </a>
                     </div>
+                    <?php if (userConnected()) : ?>
+                        <div class="dropdown text-end">
+                            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://randomuser.me/api/portraits/women/88.jpg" alt="user random" width="32" height="32" class="rounded-circle">
+                            </a>
+                            <ul class="dropdown-menu text-small">
 
-                    <div class="dropdown text-end">
-                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://randomuser.me/api/portraits/women/88.jpg" alt="user random" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="profil.php">Profil</a></li>
-                            <li><a class="dropdown-item" href="#">Réglages</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="./admin/index.php">Backoffice</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">
-                                    <i class="bi bi-box-arrow-in-right fs-4">
-                                    </i>
-                                    Logout
-                                </a></li>
-                        </ul>
-                    </div>
+
+                                <li><a class="dropdown-item" href="profil.php">Profil</a></li>
+                                <li><a class="dropdown-item" href="#">Réglages</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <?php if (userIsAdmin()) : ?>
+
+                                    <li><a class="dropdown-item" href="./admin/index.php">Backoffice</a></li>
+                                    <li>
+                                    <?php endif ?>
+
+                                    <hr class="dropdown-divider">
+                                    </li>
+
+
+                                    <li><a class="dropdown-item" href="logout.php">
+                                            <i class="bi bi-box-arrow-in-right fs-4">
+                                            </i>
+                                            Logout
+                                        </a></li>
+                                <?php endif ?>
+
+                            </ul>
+                        </div>
                 </div>
             </div>
         </header>

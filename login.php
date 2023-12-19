@@ -20,20 +20,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
 
         if (password_verify($password, $result['mdp'])) {
-            $_SESSION['user']['username'] = $result['username'];
-            $_SESSION['user']['firstname'] = $result['firstname'];
-            $_SESSION['user']['lastname'] = $result['id_membre'];
-            $_SESSION['user']['address'] = $result['address'];
-            $_SESSION['user']['city'] = $result['city'];
+
+            $_SESSION['user']['username'] = $result['pseudo'];
+            $_SESSION['user']['firstname'] = $result['prenom'];
+            $_SESSION['user']['lastname'] = $result['nom'];
+            $_SESSION['user']['address'] = $result['adresse'];
+            $_SESSION['user']['email'] = $result['email'];
+            $_SESSION['user']['city'] = $result['ville'];
             $_SESSION['user']['code_postal'] = $result['code_postal'];
+            $_SESSION['user']['statut'] = $result['statut'];
+
 
             header('Location: profil.php');
         } else {
             $error['password'] = "The password is not identical";
         }
     }
-}
 
+    if (userConnected()) {
+        header('Location:profil.php');
+        exit();
+    }
+}
 
 
 

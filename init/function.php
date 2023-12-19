@@ -1,5 +1,6 @@
 
 <?php
+
 function inputCleaning($name)
 {
     if (!empty($_POST["$name"])) {
@@ -14,5 +15,23 @@ function checkCharacter($name)
         echo "";
     } else {
         $error['char'] =  "The $name required to have between 4 and 50 characters. ";
+    }
+}
+
+function userConnected()
+{
+    if (isset($_SESSION['user'])) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function userIsAdmin()
+{
+    if (userConnected() && $_SESSION['user']['statut'] == 1) {
+        return true;
+    } else {
+        return false;
     }
 }

@@ -94,6 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         var_dump($error);
     }
 }
+if (userConnected()) {
+    header('Location:profil.php');
+    exit();
+}
 
 ?>
 <?php require_once 'partials/header.php' ?>

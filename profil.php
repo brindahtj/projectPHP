@@ -1,5 +1,12 @@
-<?php require_once 'partials/header.php' ?>
+<?php require_once 'init/init.php';
+if (!userConnected()) {
+    header('Location:login.php');
+}
 
+
+
+?>
+<?php require_once 'partials/header.php' ?>
 
 <div class="container-fluid">
     <div class="row">
@@ -38,7 +45,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#logout-content">
+                        <a class="nav-link" href="logout.php">
                             Logout
                             <i class="bi bi-box-arrow-right"></i>
                         </a>
@@ -61,9 +68,9 @@
                                 <img src="https://randomuser.me/api/portraits/women/88.jpg" alt="Photo de profil" class="img-fluid rounded-circle">
                             </div>
                             <div class="col-md-9">
-                                <p>Nom: John Doe</p>
-                                <p>Email: john.doe@example.com</p>
-                                <p>Adresse: 123 Rue de la Liberté, Ville</p>
+                                <p>Nom: <?php $_SESSION['user']['lastname'] . ' ' . $_SESSION['user']['firstname']  ?></p>
+                                <p>Email: <?= $_SESSION['user']['email'] ?></p>
+                                <p>Adresse: <?php $_SESSION['user']['address'] . ', ' . $_SESSION['user']['code_postal'] . '  ' . $_SESSION['user']['city'] ?></p>
                                 <p>Téléphone: +123 456 7890</p>
                             </div>
                         </div>
@@ -109,9 +116,9 @@
             <!-- Mon Adresse -->
             <div id="mon-adresse-content">
                 <h2>Mes Adresses</h2>
-                <p>Adresse: 123 Rue de la Liberté, Ville</p>
-                <p>Code postal: 12345</p>
-                <p>Ville: Ma Ville</p>
+                <p>Adresse: <?= $_SESSION['user']['address'] ?></p>
+                <p>Code postal:<?= $_SESSION['user']['code_postal'] ?></p>
+                <p>Ville: <?= $_SESSION['user']['city']  ?></p>
                 <!-- Ajoutez d'autres informations d'adresse fictives si nécessaire -->
             </div>
 
