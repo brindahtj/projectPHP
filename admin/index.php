@@ -1,3 +1,10 @@
+<?php
+require_once '../init/init.php';
+if (!userIsAdmin()) {
+    header('Location: ../index.php');
+}
+?>
+
 <?php require_once 'partials/nav.php' ?>
 
 
@@ -9,4 +16,4 @@
 </div>
 <!-- Fin du contenu du tableau de bord -->
 
-<?php require_once 'partials/footers.php' ?>
+<?php require_once 'partials/footer.php' ?>
