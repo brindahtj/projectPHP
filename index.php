@@ -1,3 +1,11 @@
+<?php require_once 'init/init.php' ?>
+<?php
+$sql = "SELECT * FROM produit ORDER BY id_produit DESC LIMIT 6";
+$req = $pdo->query($sql);
+$result = $req->fetchAll(PDO::FETCH_ASSOC);
+var_dump($result);
+?>
+
 <?php require_once 'partials/header.php' ?>
 
 <div class="container">
