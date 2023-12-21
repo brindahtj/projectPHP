@@ -3,7 +3,6 @@
 $sql = "SELECT * FROM produit ORDER BY id_produit DESC LIMIT 6";
 $req = $pdo->query($sql);
 $result = $req->fetchAll(PDO::FETCH_ASSOC);
-var_dump($result);
 ?>
 
 <?php require_once 'partials/header.php' ?>
@@ -76,12 +75,9 @@ var_dump($result);
                 <div class="container">
 
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <?php include 'partials/card.php' ?>
-                        <?php include 'partials/card.php' ?>
-                        <?php include 'partials/card.php' ?>
-                        <?php include 'partials/card.php' ?>
-                        <?php include 'partials/card.php' ?>
-                        <?php include 'partials/card.php' ?>
+                        <?php foreach ($result as $key => $product) : ?>
+                            <?php include 'partials/card.php' ?>
+                        <?php endforeach ?>
 
                     </div>
                 </div>
